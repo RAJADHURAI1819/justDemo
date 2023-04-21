@@ -1,0 +1,157 @@
+const formik = useFormik({
+    initialValues: {
+      movie: "",
+      year: "",
+      Genre: "",
+      url: "",
+    },
+    onSubmit: (values) => {
+      axios.put(`${apiConfig.moviesapi}/updateMovie/:${values.id}`, {
+        movie: values.movie,
+        year: values.year,
+        Genre: values.Genre,
+        url: values.url,
+      });
+      document.getElementById("movie").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("subject").value = "";
+      document.getElementById("message").value = "";
+      formik.values.movie = "";
+      formik.values.email = "";
+      formik.values.subject = "";
+      formik.values.message = "";
+    },
+    validationSchema: yup.object().shape({
+      movie: yup
+        .string()
+        .required("Name cannot be left blank"),
+      email: yup
+        .string()
+        .required("email cannot be left blank"),
+      subject: yup
+        .string()
+        .required("subject cannot be left blank"),
+      message: yup
+        .string()
+        .required("message cannot be left blank"),
+    }),
+  });
+  return (
+    <div style={{ backgroundColor: "#1f2235" }}>
+      <nav className="navbar">
+        <div className="logo">
+          <img src="mpr.png" className="imgg" />
+          <h1 style={{ color: "black" }}>Update movies </h1>
+        </div>
+      </nav>
+      <div style={{ marginTop: 10 }}>
+        <form
+          style={{ backgroundColor: "Black", width: "97%", paddingBottom: 15 }}
+          onSubmit={formik.handleSubmit}
+        >
+          <div class="row mb-3" style={{ paddingTop: 15 }}>
+            <label
+              for="name"
+              class="col-sm-2 col-form-label"
+              style={{ color: "whitesmoke", fontSize: 15 }}
+            >
+              Your Name :
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                value={formik.values.name}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                placeholder="Enter here"
+              />
+              {formik.errors.name && formik.touched.name ? (
+                <span className="text-danger">{formik.errors.name}</span>
+              ) : null}
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label
+              for="email"
+              class="col-sm-2 col-form-label"
+              style={{ color: "whitesmoke", fontSize: 15 }}
+            >
+              Email :
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                id="email"
+                name="email"
+                value={formik.values.email}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                placeholder="Enter here"
+              />
+              {formik.errors.email && formik.touched.email ? (
+                <span className="text-danger">{formik.errors.email}</span>
+              ) : null}
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label
+              for="subject"
+              class="col-sm-2 col-form-label"
+              style={{ color: "whitesmoke", fontSize: 15 }}
+            >
+              Subject :
+            </label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                id="subject"
+                name="subject"
+                value={formik.values.subject}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                placeholder="Enter here"
+              />
+              {formik.errors.subject && formik.touched.subject ? (
+                <span className="text-danger">{formik.errors.subject}</span>
+              ) : null}
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label
+              for="message"
+              class="col-sm-2 col-form-label"
+              style={{ color: "whitesmoke", fontSize: 15 }}
+            >
+              Message :
+            </label>
+            <div class="col-sm-8">
+              <textarea
+                rows="4"
+                cols="38"
+                name="message"
+                id="message"
+                style={{ color: "black" }}
+                form="usrform"
+                onChange={formik.handleChange}
+                value={formik.values.message}
+                onBlur={formik.handleBlur}
+                placeholder="Enter here"
+              ></textarea>
+              {formik.errors.message && formik.touched.message ? (
+                <span className="text-danger">{formik.errors.message}</span>
+              ) : null}
+            </div>
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <Button type="submit" variant="contained">
+              Submit
+            </Button>
+          </div>
+        </form>
+      </div>
+    </div>

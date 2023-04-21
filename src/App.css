@@ -1,0 +1,19 @@
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(14, 188, 236);
+  padding: 15px;
+  margin-bottom: 50px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.imgg {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
